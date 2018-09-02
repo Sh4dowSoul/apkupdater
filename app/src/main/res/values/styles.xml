@@ -1,16 +1,17 @@
 <resources>
 
     <!-- Blue Theme -->
-    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
+    <style name="AppThemeBlue.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#FFF</item>
+        <item name="colorPrimaryDark">#b3b3b3</item>
         <item name="colorAccent">@color/colorAccentBlue</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryBlue</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryBlue</item>
-        <item name="android:textColor">@color/textColorBlue</item>
         <item name="preferenceTheme">@style/PreferenceThemeBlue</item>
         <item name="alertDialogTheme">@style/DialogThemeBlue</item>
+        <item name="android:textColor">@color/textColorBlue</item>
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
+
+    <style name="AppThemeBlue" parent="AppThemeBlue.Base"/>
 
     <style name="DialogThemeBlue" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
