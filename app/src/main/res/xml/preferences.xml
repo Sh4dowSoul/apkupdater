@@ -12,7 +12,7 @@
             android:summary="%s"
             android:entries="@array/theme_values"
             android:entryValues="@array/theme_values"
-            android:defaultValue="@string/theme_blue"
+            android:defaultValue="@string/theme_light"
         />
         <ListPreference
             android:key="@string/preferences_general_notification_key"

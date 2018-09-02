@@ -25,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:text="App Name"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="?android:textColorPrimary"
                 android:layout_toRightOf="@+id/installed_app_icon"/>
             <TextView
@@ -69,5 +68,6 @@
         android:textSize="16sp"
         android:textColor="?android:textColorPrimary"
         android:visibility="gone"
-        android:layout_marginStart="56dp"/>
+        android:layout_marginStart="56dp"
+        android:textStyle="italic"/>
 </RelativeLayout >

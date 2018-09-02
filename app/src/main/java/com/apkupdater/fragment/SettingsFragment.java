@@ -5,12 +5,11 @@ package com.apkupdater.fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
+import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.apkupdater.R;
-import com.apkupdater.activity.MainActivity_;
 import com.apkupdater.dialog.OwnPlayAccountDialog;
 import com.apkupdater.event.UpdateInstalledAppsEvent;
 import com.apkupdater.model.Constants;
@@ -22,8 +21,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 
 import eu.chainfire.libsuperuser.Shell;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -105,7 +102,7 @@ public class SettingsFragment
 					alarmUtil.setAlarmFromOptions();
 				} else if (key.equals(getString(R.string.preferences_general_theme_key))) {
 					// Change theme
-					MainActivity_.intent(getContext()).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
+                    getActivity().recreate();
 				} else if (key.equals(getString(R.string.preferences_general_exclude_system_apps_key)) ||
 					key.equals(getString(R.string.preferences_general_exclude_disabled_apps_key))
 				) {

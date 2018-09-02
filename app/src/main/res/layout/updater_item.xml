@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.apkupdater.view.CustomCardView
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -51,7 +51,6 @@
                         android:id="@+id/isbeta_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_beta"
                         android:layout_toRightOf="@id/installed_app_name"
                         android:layout_alignBottom="@id/installed_app_name"
                         android:visibility="visible"
@@ -119,5 +118,5 @@
     </LinearLayout>
 
 
-</com.apkupdater.view.CustomCardView>
+</android.support.v7.widget.CardView>
 

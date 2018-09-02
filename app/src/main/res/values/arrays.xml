@@ -12,12 +12,9 @@
         <item>@string/alarm_weekly</item>
     </array>
     <array name="theme_values">
-        <item>@string/theme_blue</item>
-        <item>@string/theme_pink</item>
+        <item>@string/theme_light</item>
         <item>@string/theme_dark</item>
-        <item>@string/theme_orange</item>
-        <item>@string/theme_bloody</item>
-        <item>@string/theme_amoled</item>
+        <item>@string/theme_auto</item>
     </array>
     <array name="num_threads_values">
         <item>@string/num_threads_one</item>

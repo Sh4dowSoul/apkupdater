@@ -66,11 +66,6 @@
 <string name="alarm_never">"Aldrig"</string>
 <string name="alarm_daily">"Dagligt"</string>
 <string name="alarm_weekly">"Ugentligt"</string>
-<string name="theme_blue">"Blå Meth"</string>
-<string name="theme_pink">"Lyserød Panter"</string>
-<string name="theme_dark">"Mørk Droid"</string>
-<string name="theme_orange">"Appelsinjuice"</string>
-<string name="theme_bloody">"Blodigt Tomrum"</string>
 <string name="content_description_app_icon">"App ikon"</string>
 <string name="update_check_failed_no_internet">"Søgning efter opdateringer fejlede: Ingen internetforbindelse."</string>
 <string name="update_check_failed_no_wifi">"Søgning efter opdateringer fejlede: Ingen Wi-Fi."</string>
@@ -93,7 +88,6 @@
 <string name="preferences_play_own_account_summary">"Anvend din egen Google konto i stedet for en delt konto."</string>
 <string name="get_token_error">"Der var en fejl i forsøget på at få mærket"</string>
 <string name="get_token_launch_url">"Starter totrins-url."</string>
-<string name="theme_amoled">"Darth Droid"</string>
 <string name="get_token_get_token">"HENT MÆRKE"</string>
 <string name="get_token_cancel">"ANNULLER"</string>
 <string name="get_token_help">"HJÆLP"</string>

@@ -66,12 +66,7 @@
 <string name="alarm_never">"Nigdy"</string>
 <string name="alarm_daily">"Codziennie"</string>
 <string name="alarm_weekly">"Tygodniowo"</string>
-<string name="theme_blue">"Niebieski"</string>
-<string name="theme_pink">"Różowy"</string>
-<string name="theme_dark">"Ciemny"</string>
-<string name="theme_orange">"Pomarańczowy"</string>
-<string name="theme_bloody">"Czerwony"</string>
-<string name="content_description_app_icon">"Ikona aplikacji"</string>
+    <string name="content_description_app_icon">"Ikona aplikacji"</string>
 <string name="update_check_failed_no_internet">"Błąd szukania aktualizacji: brak połączenia z internetem."</string>
 <string name="update_check_failed_no_wifi">"Błąd szukania aktualizacji: brak Wi-Fi."</string>
 <string name="action_ignore_app">"IGNORUJ"</string>
@@ -95,8 +90,7 @@
 <string name="preferences_play_own_account_summary">"Użyj własnego konta Google zamiast konta wspólnego."</string>
 <string name="get_token_error">"Błąd pobierania tokena."</string>
 <string name="get_token_launch_url">"Uruchamianie weryfikacji dwuetapowej."</string>
-<string name="theme_amoled">"Darth Droid"</string>
-<string name="get_token_get_token">"GET TOKEN"</string>
+    <string name="get_token_get_token">"GET TOKEN"</string>
 <string name="get_token_cancel">"CANCEL"</string>
 <string name="get_token_help">"HELP"</string>
 <string name="snackbar_close">"CLOSE"</string>

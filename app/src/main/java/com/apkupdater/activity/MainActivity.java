@@ -3,12 +3,15 @@ package com.apkupdater.activity;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.FrameLayout;
@@ -30,20 +33,22 @@ import com.apkupdater.receiver.BootReceiver_;
 import com.apkupdater.service.UpdaterService_;
 import com.apkupdater.updater.UpdaterOptions;
 import com.apkupdater.util.AnimationUtil;
-import com.apkupdater.util.ColorUtil;
 import com.apkupdater.util.InjektUtil;
 import com.apkupdater.util.InstalledAppUtil;
 import com.apkupdater.util.LogUtil;
 import com.apkupdater.util.MyBus;
 import com.apkupdater.util.ServiceUtil;
 import com.apkupdater.util.SnackBarUtil;
-import com.apkupdater.util.ThemeUtil;
 import com.squareup.otto.Subscribe;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
+
+import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO;
+import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_YES;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,12 +82,18 @@ public class MainActivity
     private int [] mSlideOut = { R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left };
     private int [] mSlideIn = { R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right };
 
+    //App Theme Constants
+    public static final String APP_THEME = "app_theme";
+    public static final String DEFAULT_THEME = "Light";
+    public static final String AUTO_THEME = "Auto";
+    public static final String DARK_THEME = "Dark";
+    private String CURRENT_THEME;
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void onCreate(
-		Bundle savedInstanceState
-	) {
+	public void onCreate(Bundle savedInstanceState) {
+		setThemeFromOptions();
 		super.onCreate(savedInstanceState);
 
 		// Inject Singletons
@@ -92,8 +103,6 @@ public class MainActivity
 		InjektUtil.Companion.addLogUtilSingleton(mLog);
 		InjektUtil.Companion.addActivitySingleton(this);
 
-		// Set theme and set activity content and toolbar
-		setThemeFromOptions();
 		setContentView(R.layout.activity_main);
 		setSupportActionBar(mToolbar);
 
@@ -267,11 +276,6 @@ public class MainActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        menu.findItem(R.id.action_settings).setIcon(
-            ColorUtil.tintDrawable(this, menu.findItem(R.id.action_settings).getIcon(), android.R.attr.textColorPrimary)
-        );
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -315,11 +319,22 @@ public class MainActivity
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	private void setThemeFromOptions(
-	) {
-		int theme = ThemeUtil.getActivityThemeFromOptions(getBaseContext());
-		mAppState.setCurrentTheme(theme);
-		setTheme(theme);
+	private void setThemeFromOptions() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Load App Theme
+        CURRENT_THEME = prefs.getString(APP_THEME, DEFAULT_THEME);
+        switch (CURRENT_THEME) {
+            case AUTO_THEME:
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_AUTO);
+                break;
+            case DARK_THEME:
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+                break;
+            case DEFAULT_THEME:
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+                break;
+        }
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,12 +342,12 @@ public class MainActivity
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+/*
 		// We are checking if the theme changed
 		if (mAppState.getCurrentTheme() != ThemeUtil.getActivityThemeFromOptions(getBaseContext())) {
 			finish();
 			MainActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP).start();
-		}
+		} */
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

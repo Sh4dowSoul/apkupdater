@@ -10,7 +10,7 @@
     <string name="preferences_general_ignorelist_key" translatable="false">preferences_general_ignorelist_key</string>
     <string name="preferences_general_ignoreversionlist_key" translatable="false">preferences_general_ignoreversionlist_key</string>
     <string name="preferences_general_notification_key" translatable="false">preferences_general_notification_key</string>
-    <string name="preferences_general_theme_key" translatable="false">preferences_general_theme_key</string>
+    <string name="preferences_general_theme_key" translatable="false">app_theme</string>
     <string name="preferences_general_alarm_key" translatable="false">preferences_general_alarm_key</string>
     <string name="preferences_general_num_threads_key" translatable="false">preferences_general_num_threads_key</string>
     <string name="preferences_general_use_apkmirror_key" translatable="false">preferences_general_use_apkmirror_key</string>
@@ -54,4 +54,7 @@
     <string name="update_hour_twenty_one" translatable="false">21:00</string>
     <string name="update_hour_twenty_two" translatable="false">22:00</string>
     <string name="update_hour_twenty_three" translatable="false">23:00</string>
+    <string name="theme_light"  translatable="false">Light</string>
+    <string name="theme_auto"  translatable="false">Auto</string>
+    <string name="theme_dark" translatable="false">"Dark"</string>
 </resources>

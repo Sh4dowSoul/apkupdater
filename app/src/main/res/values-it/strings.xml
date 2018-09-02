@@ -66,12 +66,7 @@
 <string name="alarm_never">"Mai"</string>
 <string name="alarm_daily">"Quotidiano"</string>
 <string name="alarm_weekly">"Settimanale"</string>
-<string name="theme_blue">"Metanfetamina Blu"</string>
-<string name="theme_pink">"Pantera Rosa"</string>
-<string name="theme_dark">"Droid Scuro"</string>
-<string name="theme_orange">"Succo d'Arancia"</string>
-<string name="theme_bloody">"Sanguinoso"</string>
-<string name="content_description_app_icon">"Icona dell'applicazione"</string>
+    <string name="content_description_app_icon">"Icona dell'applicazione"</string>
 <string name="update_check_failed_no_internet">"Verifica degli aggiornamenti non riuscita: nessuna connessione a Internet."</string>
 <string name="update_check_failed_no_wifi">"Verifica degli aggiornamenti non riuscita: Nessun Wi-Fi."</string>
 <string name="action_ignore_app">"IGNORA"</string>
@@ -95,8 +90,7 @@
 <string name="preferences_play_own_account_summary">"Utilizza il proprio account Google anziché un account condiviso."</string>
 <string name="get_token_error">"Si è verificato un errore nel tentativo di ottenere il token."</string>
 <string name="get_token_launch_url">"Lancio url per la verifica a due passaggi."</string>
-<string name="theme_amoled">"Robot Darth"</string>
-<string name="get_token_get_token">"OTTIENI TOKEN"</string>
+    <string name="get_token_get_token">"OTTIENI TOKEN"</string>
 <string name="get_token_cancel">"ANNULLA"</string>
 <string name="get_token_help">"AIUTO"</string>
 <string name="snackbar_close">"CHIUDI"</string>

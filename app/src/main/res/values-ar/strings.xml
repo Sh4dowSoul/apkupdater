@@ -68,11 +68,6 @@ href="https://github.com/jhy/jsoup">Jsoup</a></li><li><a href="https://github.co
 <string name="alarm_never">"أبدا"</string>
 <string name="alarm_daily">"يومي"</string>
 <string name="alarm_weekly">"أسبوعي"</string>
-<string name="theme_blue">"أزرق على أبيض"</string>
-<string name="theme_pink">"وردي على أسود"</string>
-<string name="theme_dark">"أخضر على أسود"</string>
-<string name="theme_orange">"برتقالي على أبيض"</string>
-<string name="theme_bloody">"أسود على أحمر"</string>
 <string name="content_description_app_icon">"رمز التطبيق"</string>
 <string name="update_check_failed_no_internet">"فشل التحقق من التحديثات: لا يوجد أي اتصال بالإنترنت."</string>
 <string name="update_check_failed_no_wifi">"فشل التحقق من التحديثات: لا يوجد شبكة WiFi."</string>
@@ -98,7 +93,6 @@ href="https://github.com/jhy/jsoup">Jsoup</a></li><li><a href="https://github.co
 <string name="preferences_play_own_account_summary">"استخدم حساب google الخاص بك بدلا من حساب مشترك."</string>
 <string name="get_token_error">"حدث خطأ اثناء محاولة الحصول على الرمز المميز."</string>
 <string name="get_token_launch_url">"إطلاق عنوان اثنين عامل."</string>
-<string name="theme_amoled">"دارث الروبوت"</string>
 <string name="get_token_get_token">"الحصول على رمز مميز"</string>
 <string name="get_token_cancel">"إلغاء"</string>
 <string name="get_token_help">"مساعدة"</string>

@@ -220,14 +220,6 @@ public class UpdaterOptions
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public String getTheme(
-	) {
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		return sharedPref.getString(mContext.getString(R.string.preferences_general_theme_key), mContext.getString(R.string.theme_blue));
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	public boolean getExcludeSystemApps(
 	) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);

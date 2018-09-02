@@ -66,12 +66,7 @@
 <string name="alarm_never">"从不"</string>
 <string name="alarm_daily">"每日"</string>
 <string name="alarm_weekly">"每周"</string>
-<string name="theme_blue">"Blue Meth"</string>
-<string name="theme_pink">"Pink Panther"</string>
-<string name="theme_dark">"Dark Droid"</string>
-<string name="theme_orange">"Orange Juice"</string>
-<string name="theme_bloody">"Bloody Void"</string>
-<string name="content_description_app_icon">"应用的图标"</string>
+    <string name="content_description_app_icon">"应用的图标"</string>
 <string name="update_check_failed_no_internet">"检查更新失败：没有互联网连接。"</string>
 <string name="update_check_failed_no_wifi">"检查更新失败：没有Wi-Fi。"</string>
 <string name="action_ignore_app">"忽略"</string>
@@ -95,8 +90,7 @@
 <string name="preferences_play_own_account_summary">"使用您自己的Google 帐户，而不是共享帐户。"</string>
 <string name="get_token_error">"尝试获取Token时出错。"</string>
 <string name="get_token_launch_url">"正在启动两个factor url。"</string>
-<string name="theme_amoled">"Darth Droid"</string>
-<string name="get_token_get_token">"获取Token"</string>
+    <string name="get_token_get_token">"获取Token"</string>
 <string name="get_token_cancel">"返回"</string>
 <string name="get_token_help">"帮助"</string>
 <string name="snackbar_close">"关闭"</string>

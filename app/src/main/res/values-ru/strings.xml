@@ -66,12 +66,7 @@
 <string name="alarm_never">"Никогда"</string>
 <string name="alarm_daily">"Ежедневно"</string>
 <string name="alarm_weekly">"Еженедельно"</string>
-<string name="theme_blue">"Blue Meth"</string>
-<string name="theme_pink">"Pink Panther"</string>
-<string name="theme_dark">"Dark Droid"</string>
-<string name="theme_orange">"Orange Juice"</string>
-<string name="theme_bloody">"Bloody Void"</string>
-<string name="content_description_app_icon">"Иконка приложения"</string>
+    <string name="content_description_app_icon">"Иконка приложения"</string>
 <string name="update_check_failed_no_internet">"Сбой проверки обновлений. Интернет недоступен."</string>
 <string name="update_check_failed_no_wifi">"Сбой проверки обновлений. Wi-Fi недоступен."</string>
 <string name="action_ignore_app">"ИСКЛЮЧИТЬ"</string>
@@ -93,8 +88,7 @@
 <string name="preferences_play_own_account_summary">"Использовать собственный аккаунт Google вместо общего."</string>
 <string name="get_token_error">"Ошибка при получении токена"</string>
 <string name="get_token_launch_url">"Получение двухфакторной ссылки"</string>
-<string name="theme_amoled">"Darth Droid AMOLED"</string>
-<string name="get_token_get_token">"Получить токен"</string>
+    <string name="get_token_get_token">"Получить токен"</string>
 <string name="get_token_cancel">"Отмена"</string>
 <string name="get_token_help">"Помощь"</string>
 <string name="snackbar_close">"Закрыть"</string>

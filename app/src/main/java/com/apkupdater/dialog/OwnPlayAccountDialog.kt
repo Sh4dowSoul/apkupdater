@@ -6,14 +6,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
-import android.view.ContextThemeWrapper
 import android.view.View
 import com.apkupdater.R
 import com.apkupdater.model.Constants
 import com.apkupdater.updater.UpdaterOptions
 import com.apkupdater.util.DownloadUtil
 import com.apkupdater.util.GooglePlayUtil
-import com.apkupdater.util.ThemeUtil
 import com.github.yeriomin.playstoreapi.AuthException
 import kotlinx.android.synthetic.main.dialog_own_play.view.*
 import kotlin.concurrent.thread
@@ -39,7 +37,7 @@ class OwnPlayAccountDialog
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-        return AlertDialog.Builder(ContextThemeWrapper(context, ThemeUtil.getActivityThemeFromOptions(context)))
+        return AlertDialog.Builder(context!!)
             .setTitle("Setup Play Account")
             .setView(getContentView())
             .setNegativeButton(getString(R.string.get_token_cancel), null)

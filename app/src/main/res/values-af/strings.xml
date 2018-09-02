@@ -66,11 +66,6 @@
 <string name="alarm_never">"Nooit"</string>
 <string name="alarm_daily">"Daagliks"</string>
 <string name="alarm_weekly">"Weekliks"</string>
-<string name="theme_blue">"Blou \"Meth\""</string>
-<string name="theme_pink">"Pienk Luiperd"</string>
-<string name="theme_dark">"Donker \"Droid\""</string>
-<string name="theme_orange">"Lemoensap"</string>
-<string name="theme_bloody">"Bloedige Leemte"</string>
 <string name="content_description_app_icon">"Applikasie Ikoon"</string>
 <string name="update_check_failed_no_internet">"Soek na opdaterings het misluk: Geen internet konneksie nie."</string>
 <string name="update_check_failed_no_wifi">"Soek na opdaterings het misluk: Geen Wi-Fi nie."</string>
@@ -93,7 +88,6 @@
 <string name="preferences_play_own_account_summary">"Gebruik jou eie Google-rekening in plaas van 'n gedeelde rekening."</string>
 <string name="get_token_error">"Daar was 'n fout om die \"token\" te probeer kry."</string>
 <string name="get_token_launch_url">"Begin van twee-faktor URL."</string>
-<string name="theme_amoled">"\"Darth Droid\""</string>
 <string name="get_token_get_token">"KRY \"TOKEN\""</string>
 <string name="get_token_cancel">"KANSELLEER"</string>
 <string name="get_token_help">"HELP"</string>

@@ -1,70 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#0d47a1</color>-->
-    <!--<color name="colorAccent">#ffffff</color>-->
-    <!--<color name="colorAccentDark">#77ffffff</color>-->
+    <color name="colorPrimary">#FFF</color>
+    <color name="colorPrimaryDark">#b3b3b3</color>
+    <color name="colorAccent">#A4B0D9</color>
 
-    <color name="colorPrimary">#0D47A1</color>
-    <color name="colorPrimaryDark">#0c3791</color>
-    <color name="colorPrimaryLight">#FFFFFF</color>
+    <color name="colorBackground">#FFF</color>
 
-    <!-- accent color: red -->
-    <color name="colorAccent">#BAD9FF</color>
-
-    <!-- text color: white -->
-    <color name="textColorPrimary">#FF0000</color>
-    <color name="textColorSecondary">#FFFF00</color>
-
-    <!-- inverse text color: 87% black -->
-    <color name="textColorPrimaryInverse">#00FF00</color>
-    <color name="textColorSecondaryInverse">#00FFFF</color>
-    
     <!-- General colors -->
-    <color name="tabIndicatorColor">#FFFFFF</color>
     <color name="errorColor">#FFCC0000</color>
     <color name="warningColor">#FFFFCC00</color>
     <color name="infoColor">#FF30A0FF</color>
-
-    <!-- Blue theme -->
-    <color name="colorPrimaryBlue">#0D47A1</color>
-    <color name="colorPrimaryDarkBlue">#092b61</color>
-    <color name="colorAccentBlue">#6dabf7</color>
-    <color name="textColorPrimaryBlue">#FFFFFF</color>
-    <color name="textColorSecondaryBlue">#99FFFFFF</color>
-    <color name="textColorBlue">#000000</color>
-    <color name="textColorSecondaryInverseBlue">#99000000</color>
-
-    <!-- Orange theme -->
-    <color name="colorPrimaryOrange">#FF9800</color>
-    <color name="colorPrimaryDarkOrange">#F57C00</color>
-    <color name="colorAccentOrange">#FF5252</color>
-    <color name="textColorPrimaryOrange">#FFFFFF</color>
-    <color name="textColorSecondaryOrange">#99FFFFFF</color>
-    <color name="textColorOrange">#000000</color>
-    <color name="textColorSecondaryInverseOrange">#99000000</color>
-
-    <!-- Pink theme -->
-    <color name="colorPrimaryPink">#dc64d0</color>
-    <color name="colorPrimaryDarkPink">#994691</color>
-    <color name="colorAccentPink">#f7ff00</color>
-    <color name="textColorPrimaryPink">#FFFFFF</color>
-    <color name="textColorSecondaryPink">#99FFFFFF</color>
-    <color name="textColorPink">#FFFFFF</color>
-
-    <!-- Dark theme -->
-    <color name="colorPrimaryD">#0e7300</color>
-    <color name="colorPrimaryDarkD">#0b5300</color>
-    <color name="colorAccentDark">#19cc00</color>
-    <color name="textColorPrimaryDark">#FFFFFF</color>
-    <color name="textColorSecondaryDark">#99FFFFFF</color>
-    <color name="textColorDark">#FFFFFF</color>
-
-    <!-- Bloody theme -->
-    <color name="colorPrimaryBloody">#000000</color>
-    <color name="colorPrimaryDarkBloody">#000000</color>
-    <color name="colorAccentBloody">#000000</color>
-    <color name="textColorPrimaryBloody">#e70000</color>
-    <color name="textColorSecondaryBloody">#a70000</color>
-    <color name="textColorBloody">#e70000</color>
-
 </resources>

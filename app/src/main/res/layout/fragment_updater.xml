@@ -19,7 +19,7 @@
         android:visibility="gone"
         android:text="@string/no_new_updates"
     />
-    <com.apkupdater.view.CustomCardView
+    <android.support.v7.widget.CardView
         android:id="@+id/loader_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             />
         </LinearLayout>
-    </com.apkupdater.view.CustomCardView>
+    </android.support.v7.widget.CardView>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"

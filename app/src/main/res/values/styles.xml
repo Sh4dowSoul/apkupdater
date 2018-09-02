@@ -1,169 +1,19 @@
 <resources>
-
-    <!-- Blue Theme -->
-    <style name="AppThemeBlue.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#FFF</item>
-        <item name="colorPrimaryDark">#b3b3b3</item>
-        <item name="colorAccent">@color/colorAccentBlue</item>
-        <item name="preferenceTheme">@style/PreferenceThemeBlue</item>
-        <item name="alertDialogTheme">@style/DialogThemeBlue</item>
-        <item name="android:textColor">@color/textColorBlue</item>
-        <item name="android:windowBackground">@android:color/white</item>
+    <style name="AppTheme" parent="AppTheme.Base"/>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
-    <style name="AppThemeBlue" parent="AppThemeBlue.Base"/>
-
-    <style name="DialogThemeBlue" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
-        <item name="colorAccent">@color/colorAccentBlue</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryBlue</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryBlue</item>
-        <item name="android:textColor">@color/textColorBlue</item>
-    </style>
-
-    <style name="PreferenceThemeBlue" parent="AppThemeBlue">
-        <item name="android:textColorPrimary">@color/textColorBlue</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverseBlue</item>
-        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
+    <style name="PreferenceTheme" parent="AppTheme">
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <!-- Orange Theme -->
-    <style name="AppThemeOrange" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryOrange</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
-        <item name="colorAccent">@color/colorAccentOrange</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryOrange</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryOrange</item>
-        <item name="android:textColor">@color/textColorOrange</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOrange</item>
-        <item name="alertDialogTheme">@style/DialogThemeOrange</item>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="DialogThemeOrange" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryOrange</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
-        <item name="colorAccent">@color/colorAccentOrange</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryOrange</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryOrange</item>
-        <item name="android:textColor">@color/textColorOrange</item>
-    </style>
-
-    <style name="PreferenceThemeOrange" parent="AppThemeOrange">
-        <item name="android:textColorPrimary">@color/textColorOrange</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverseOrange</item>
-        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <!-- Pink Theme -->
-    <style name="AppThemePink" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryPink</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkPink</item>
-        <item name="colorAccent">@color/colorAccentPink</item>
-        <item name="android:textColor">@color/textColorPink</item>
-        <item name="preferenceTheme">@style/PreferenceThemePink</item>
-        <item name="alertDialogTheme">@style/DialogThemePink</item>
-    </style>
-
-    <style name="DialogThemePink" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryPink</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkPink</item>
-        <item name="colorAccent">@color/colorAccentPink</item>
-        <item name="android:textColor">@color/textColorPink</item>
-    </style>
-
-    <style name="PreferenceThemePink" parent="AppThemePink">
-        <item name="android:textColorPrimary">@color/textColorPrimaryPink</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryPink</item>
-        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <!-- Dark Theme -->
-    <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryD</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkD</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
-        <item name="android:textColor">@color/textColorDark</item>
-        <item name="preferenceTheme">@style/PreferenceThemeDark</item>
-        <item name="alertDialogTheme">@style/DialogThemeDark</item>
-    </style>
-
-    <style name="DialogThemeDark" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryD</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkD</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
-        <item name="android:textColor">@color/textColorDark</item>
-    </style>
-
-    <style name="PreferenceThemeDark" parent="AppThemeDark">
-        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryDark</item>
-        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <!-- Dark Theme -->
-    <style name="AppThemeAmoled" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryD</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkD</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
-        <item name="android:textColor">@color/textColorDark</item>
-        <item name="android:colorBackground">@color/colorPrimaryBloody</item>
-        <item name="preferenceTheme">@style/PreferenceThemeAmoled</item>
-        <item name="alertDialogTheme">@style/DialogThemeAmoled</item>
-    </style>
-
-    <style name="DialogThemeAmoled" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryD</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkD</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
-        <item name="android:textColor">@color/textColorDark</item>
-        <item name="android:colorBackground">@color/colorPrimaryBloody</item>
-    </style>
-
-    <style name="PreferenceThemeAmoled" parent="AppThemeDark">
-        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryDark</item>
-        <item name="tabIndicatorColor">@color/tabIndicatorColor</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <!-- Bloody Theme -->
-    <style name="AppThemeBloody" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimaryBloody</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkBloody</item>
-        <item name="colorAccent">@color/textColorBloody</item>
-        <item name="colorControlActivated">@color/textColorBloody</item>
-        <item name="colorControlNormal">@color/textColorBloody</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryBloody</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryBloody</item>
-        <item name="android:colorBackground">@color/colorPrimaryBloody</item>
-        <item name="android:textColor">@color/textColorBloody</item>
-        <item name="preferenceTheme">@style/PreferenceThemeBloody</item>
-        <item name="alertDialogTheme">@style/DialogThemeBloody</item>
-    </style>
-
-    <style name="DialogThemeBloody" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimaryBloody</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkBloody</item>
-        <item name="colorAccent">@color/textColorBloody</item>
-        <item name="colorControlActivated">@color/textColorBloody</item>
-        <item name="colorControlNormal">@color/textColorBloody</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryBloody</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryBloody</item>
-        <item name="android:colorBackground">@color/colorPrimaryBloody</item>
-        <item name="android:textColor">@color/textColorBloody</item>
-    </style>
-
-    <style name="PreferenceThemeBloody" parent="AppThemeBloody">
-        <item name="android:textColorPrimary">@color/textColorPrimaryBloody</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryBloody</item>
-        <item name="tabIndicatorColor">@color/textColorPrimaryBloody</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="textColorAlertDialogListItem">@color/textColorBloody</item>
-    </style>
-
 </resources>

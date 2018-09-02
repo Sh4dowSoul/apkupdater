@@ -67,12 +67,7 @@
 <string name="alarm_never">"Nooit"</string>
 <string name="alarm_daily">"Dagelijks"</string>
 <string name="alarm_weekly">"Wekelijks"</string>
-<string name="theme_blue">"Blaauw Meth"</string>
-<string name="theme_pink">"Roze Panter"</string>
-<string name="theme_dark">"Donkere Droid"</string>
-<string name="theme_orange">"Sinaasappelsap"</string>
-<string name="theme_bloody">"Bloederige Leegte"</string>
-<string name="content_description_app_icon">"App Icoon"</string>
+    <string name="content_description_app_icon">"App Icoon"</string>
 <string name="update_check_failed_no_internet">"Controleren op updates mislukt. Geen internetverbinding."</string>
 <string name="update_check_failed_no_wifi">"Controleren op updates mislukt. Geen Wi-Fi."</string>
 <string name="action_ignore_app">"NEGEREN"</string>
@@ -96,8 +91,7 @@
 <string name="preferences_play_own_account_summary">"Gebruik je eigen Google account ipv een gedeeld account."</string>
 <string name="get_token_error">"Error tijdens het verkrijgen van een token."</string>
 <string name="get_token_launch_url">"Opstarten two factor url."</string>
-<string name="theme_amoled">"Darth Droid"</string>
-<string name="get_token_get_token">"TOKEN OPHALEN"</string>
+    <string name="get_token_get_token">"TOKEN OPHALEN"</string>
 <string name="get_token_cancel">"ANNULEREN"</string>
 <string name="get_token_help">"HELP"</string>
 <string name="snackbar_close">"SLUITEN"</string>

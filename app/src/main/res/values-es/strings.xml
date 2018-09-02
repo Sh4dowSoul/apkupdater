@@ -66,12 +66,7 @@
 <string name="alarm_never">"Nunca"</string>
 <string name="alarm_daily">"Diariamente"</string>
 <string name="alarm_weekly">"Semanalmente"</string>
-<string name="theme_blue">"Metanfetamina azul"</string>
-<string name="theme_pink">"Pantera rosa"</string>
-<string name="theme_dark">"Droide oscuro"</string>
-<string name="theme_orange">"Zumo de naranja"</string>
-<string name="theme_bloody">"*Bloody Void*"</string>
-<string name="content_description_app_icon">"Icono de la aplicación"</string>
+    <string name="content_description_app_icon">"Icono de la aplicación"</string>
 <string name="update_check_failed_no_internet">"Error comprobando actualizaciones: no hay conexión a intermet."</string>
 <string name="update_check_failed_no_wifi">"Error comprobando actualizaciones: sin Wi-Fi."</string>
 <string name="action_ignore_app">"IGNORAR"</string>
@@ -95,8 +90,7 @@
 <string name="preferences_play_own_account_summary">"Use your own Google account instead of a shared account."</string>
 <string name="get_token_error">"There was an error attempting to get the token."</string>
 <string name="get_token_launch_url">"Launching two factor url."</string>
-<string name="theme_amoled">"Darth Droid"</string>
-<string name="get_token_get_token">"GET TOKEN"</string>
+    <string name="get_token_get_token">"GET TOKEN"</string>
 <string name="get_token_cancel">"CANCEL"</string>
 <string name="get_token_help">"HELP"</string>
 <string name="snackbar_close">"CLOSE"</string>
