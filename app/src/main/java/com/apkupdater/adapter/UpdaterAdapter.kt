@@ -4,6 +4,7 @@ package com.apkupdater.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.apkupdater.R
@@ -29,6 +30,7 @@ class UpdaterAdapter : RecyclerView.Adapter<UpdaterViewHolder> {
 	private var mView : RecyclerView? = null
 	private val mBus : MyBus = InjektUtil.injekt?.get()!!
 	private var mMergedUpdates : MutableList<MergedUpdate> = mutableListOf()
+	private var mMergedUpdatesBackup : MutableList<MergedUpdate> = mutableListOf()
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpdaterViewHolder {
 		val v = LayoutInflater.from(parent?.context).inflate(R.layout.updater_item_new, parent, false)
@@ -78,6 +80,8 @@ class UpdaterAdapter : RecyclerView.Adapter<UpdaterViewHolder> {
 	    // Filter and sort updates
 	    mUpdates = sortUpdates(mContext as Context, mUpdates!!)
 	    mMergedUpdates = mergeUpdates(mUpdates!!)
+		mMergedUpdatesBackup.clear()
+		mMergedUpdatesBackup.addAll(mMergedUpdates)
 
 	    // Make sure we go to the start of the list
         if (b) {
@@ -157,4 +161,18 @@ class UpdaterAdapter : RecyclerView.Adapter<UpdaterViewHolder> {
 		    }
 	    }
     }
+
+	fun filter(text : String) {
+		mMergedUpdates.clear()
+		if (text.isEmpty()) {
+			mMergedUpdates.addAll(mMergedUpdatesBackup)
+		} else {
+			for (update in this!!.mMergedUpdatesBackup!!) {
+				if(update.updateList.get(0).name.toLowerCase().contains(text.toLowerCase())){
+					mMergedUpdates!!.add(update)
+				}
+			}
+		}
+		notifyDataSetChanged()
+	}
 }

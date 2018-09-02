@@ -5,12 +5,17 @@ package com.apkupdater.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,16 +32,19 @@ import com.apkupdater.event.UpdateStopEvent;
 import com.apkupdater.event.UpdaterTitleChange;
 import com.apkupdater.model.AppState;
 import com.apkupdater.model.Update;
+import com.apkupdater.service.UpdaterService_;
 import com.apkupdater.updater.UpdaterOptions;
 import com.apkupdater.util.AnimationUtil;
 import com.apkupdater.util.ColorUtil;
 import com.apkupdater.util.InstalledAppUtil;
 import com.apkupdater.util.MyBus;
+import com.apkupdater.util.ServiceUtil;
 import com.apkupdater.util.SnackBarUtil;
 import com.squareup.otto.Subscribe;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -102,6 +110,7 @@ public class UpdaterFragment
 	) {
 		super.onCreate(savedInstanceState);
 		mAdapter = new UpdaterAdapter(getContext());
+		setHasOptionsMenu(true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -314,6 +323,30 @@ public class UpdaterFragment
 			}
 		});
 	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_search, menu);
+
+		final MenuItem searchItem = menu.findItem(R.id.action_search);
+		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String s) {
+				mAdapter.filter(s);
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String s) {
+				mAdapter.filter(s);
+				return true;
+			}
+		});
+
+		super.onCreateOptionsMenu(menu,inflater);
+	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

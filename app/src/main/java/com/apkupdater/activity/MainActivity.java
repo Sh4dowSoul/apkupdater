@@ -3,17 +3,14 @@ package com.apkupdater.activity;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -44,7 +41,6 @@ import com.apkupdater.util.ThemeUtil;
 import com.squareup.otto.Subscribe;
 
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
@@ -71,9 +67,6 @@ public class MainActivity
 
 	@ViewById(R.id.container)
 	FrameLayout mContainer;
-
-	@ViewById(R.id.update_button)
-    FloatingActionButton mUpdateButton;
 
 	SettingsFragment_ mSettingsFragment;
 	AboutFragment_ mAboutFragment;
@@ -163,32 +156,11 @@ public class MainActivity
             }, 1);
         }
 
-        // Color floating action button
-        colorFloatingActionButton();
-
 		if (new UpdaterOptions(this).updateOnStartup()){
 			onUpdateClick();
 		}
 
 	}
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private void colorFloatingActionButton(
-    ) {
-	    if (ThemeUtil.getActivityThemeFromOptions(this) == R.style.AppThemeBloody) {
-	        mUpdateButton.setBackgroundTintList(
-	            ColorStateList.valueOf(ColorUtil.getColorFromContext(this, android.R.attr.textColorPrimary))
-            );
-            mUpdateButton.setImageDrawable(
-                ColorUtil.tintDrawable(this, mUpdateButton.getDrawable(), R.attr.colorPrimary)
-            );
-        } else {
-            mUpdateButton.setImageDrawable(
-                ColorUtil.tintDrawable(this, mUpdateButton.getDrawable(), android.R.attr.textColorPrimary)
-            );
-        }
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -220,11 +192,9 @@ public class MainActivity
 	) {
 		if (b) {
 		    doTransition(mSlideOut, mSettingsFragment, new Fragment[] {mMainFragment, mLogFragment, mAboutFragment});
-			setUpdateButtonVisibility(false);
 			changeToolbar(getString(R.string.action_settings), true);
 		} else {
             doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			setUpdateButtonVisibility(true);
 			changeToolbar(getString(R.string.app_name), false);
 		}
 
@@ -238,11 +208,9 @@ public class MainActivity
 	) {
 		if (b) {
             doTransition(mSlideOut, mLogFragment, new Fragment[] {mMainFragment, mSettingsFragment, mAboutFragment});
-			setUpdateButtonVisibility(false);
 			changeToolbar(getString(R.string.action_log), true);
 		} else {
             doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			setUpdateButtonVisibility(true);
 			changeToolbar(getString(R.string.app_name), false);
 		}
 
@@ -256,11 +224,9 @@ public class MainActivity
 	) {
 		if (b) {
             doTransition(mSlideOut, mAboutFragment, new Fragment[] {mMainFragment, mSettingsFragment, mLogFragment});
-			setUpdateButtonVisibility(false);
 			changeToolbar(getString(R.string.tab_about), true);
 		} else {
             doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			setUpdateButtonVisibility(true);
 			changeToolbar(getString(R.string.app_name), false);
 		}
 
@@ -387,7 +353,7 @@ public class MainActivity
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Click(R.id.update_button)
+    //@Click(R.id.update_button)
     public void onUpdateClick(
     ) {
         if (!ServiceUtil.isServiceRunning(getBaseContext(), UpdaterService_.class)) {
@@ -395,13 +361,6 @@ public class MainActivity
         }
     }
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void setUpdateButtonVisibility(
-        boolean visible
-    ) {
-        mUpdateButton.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
