@@ -4,8 +4,10 @@ package com.apkupdater.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -45,6 +47,7 @@ import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static java.security.AccessController.getContext;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,6 +289,10 @@ public class UpdaterFragment
 	void init(
 	) {
         mAdapter.init(mRecyclerView, new ArrayList<Update>());
+		mRecyclerView.setHasFixedSize(true);
+		DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+		itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+		mRecyclerView.addItemDecoration(itemDecorator);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		if (new UpdaterOptions(getContext()).disableAnimations()) {
 		    mRecyclerView.setItemAnimator(null);
