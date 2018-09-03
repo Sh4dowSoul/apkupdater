@@ -70,7 +70,7 @@ public class InstalledAppAdapter extends RecyclerView.Adapter<InstalledAppAdapte
             source.setVisibility(View.GONE);
 			mActionOneButton.setImageResource(R.drawable.ic_eye_black_24dp);
 			mActionOneButton.setVisibility(View.VISIBLE);
-			mActionOneButton.setOnClickListener(v -> {
+			mView.setOnClickListener(v -> {
 				// Get the ignore list from the options
 				UpdaterOptions options = new UpdaterOptions(mContext);
 				List<String> ignore_list = options.getIgnoreList();

@@ -60,7 +60,6 @@
             android:src="@drawable/ic_expand_more_black_24dp"
             android:layout_centerInParent="true"
             android:padding="8dp"
-            android:background="?android:selectableItemBackground"
             android:layout_alignParentRight="true"
             android:visibility="gone"/>
         <Button
