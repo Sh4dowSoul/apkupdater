@@ -52,16 +52,19 @@ open class UpdaterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 		}
 
         //Changelog
-		mView?.changelog?.text = Html.fromHtml(u.changeLog)
-        mView?.setOnClickListener {
-			if (!u.changeLog.isEmpty()){
+		if (!u.changeLog.isNullOrEmpty()) {
+			mView?.changelog?.text = Html.fromHtml(u.changeLog)
+			mView?.setOnClickListener {
 				if (mView?.changelog?.visibility == View.VISIBLE) {
 					mView?.changelog?.visibility = View.GONE
 				} else {
 					mView?.changelog?.visibility = View.VISIBLE
 				}
 			}
-        }
+		}else {
+			mView?.setOnClickListener(null)
+		}
+
 		setTopMargin(0)
 	}
 
