@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.apkupdater.activity.MainActivity"
+>
+    <item
+        android:id="@+id/navigation_updates"
+        android:title="@string/tab_updates"
+        android:icon="@drawable/ic_new_releases_black_24dp" />
+
+    <item
+        android:id="@+id/navigation_installed"
+        android:title="@string/tab_installed"
+        android:icon="@drawable/ic_offline_pin_black_24dp" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_settings" />
+</menu>

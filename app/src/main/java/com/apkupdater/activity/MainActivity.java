@@ -5,23 +5,21 @@ package com.apkupdater.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
 
 import com.apkupdater.R;
 import com.apkupdater.event.InstallAppEvent;
 import com.apkupdater.event.PackageInstallerEvent;
 import com.apkupdater.event.SnackBarEvent;
-import com.apkupdater.fragment.AboutFragment_;
-import com.apkupdater.fragment.LogFragment_;
-import com.apkupdater.fragment.MainFragment_;
+import com.apkupdater.fragment.InstalledAppFragment_;
 import com.apkupdater.fragment.SettingsFragment_;
+import com.apkupdater.fragment.UpdaterFragment_;
 import com.apkupdater.model.AppState;
 import com.apkupdater.model.DownloadInfo;
 import com.apkupdater.model.LogMessage;
@@ -38,7 +36,6 @@ import com.squareup.otto.Subscribe;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
 
 import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO;
@@ -60,13 +57,11 @@ public class MainActivity extends AppCompatActivity {
 	@Bean
     LogUtil mLog;
 
-	@ViewById(R.id.container)
-	FrameLayout mContainer;
-
-	SettingsFragment_ mSettingsFragment;
-	AboutFragment_ mAboutFragment;
-	LogFragment_ mLogFragment;
-	MainFragment_ mMainFragment;
+	UpdaterFragment_ updaterFragment = new UpdaterFragment_();
+	InstalledAppFragment_ installedAppFragment = new InstalledAppFragment_();
+	SettingsFragment_ mSettingsFragment = new SettingsFragment_();
+	Fragment active = updaterFragment;
+	final FragmentManager fm = getSupportFragmentManager();
 
 	private int mRequestCode = 1000;
 
@@ -109,17 +104,17 @@ public class MainActivity extends AppCompatActivity {
 		// Simulate a boot com.apkupdater.receiver to set alarm
 		new BootReceiver_().onReceive(getBaseContext(), null);
 
-		// Add the main fragment
-		mMainFragment = new MainFragment_();
-		switchFragment(mMainFragment, false);
-
 		if (new UpdaterOptions(this).updateOnStartup()){
 			searchForUpdates();
 		}
 
-		mToolbar.setNavigationOnClickListener(v -> {
-			this.onBackPressed();
-		});
+		//Bottom Bar
+		BottomNavigationView navigation = findViewById(R.id.navigation);
+		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+		fm.beginTransaction().add(R.id.main_container, mSettingsFragment, "3").hide(mSettingsFragment).commit();
+		fm.beginTransaction().add(R.id.main_container, installedAppFragment, "2").hide(installedAppFragment).commit();
+		fm.beginTransaction().add(R.id.main_container, updaterFragment, "1").commit();
 	}
 
 	public void searchForUpdates(){
@@ -127,41 +122,6 @@ public class MainActivity extends AppCompatActivity {
 			UpdaterService_.intent(getApplication()).start();
 		}
 	}
-
-	public void switchFragment(Fragment fragment, boolean replace) {
-		FragmentManager manager = getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		if (replace) {
-			transaction.replace(R.id.container, fragment);
-			transaction.addToBackStack(null);
-		} else {
-			transaction.add(R.id.container, fragment);
-		}
-		transaction.commit();
-	}
-
-
-	@OptionsItem(R.id.action_settings)
-	void onSettingsClick() {
-		mSettingsFragment = new SettingsFragment_();
-		switchFragment(mSettingsFragment, true);
-	}
-
-	@OptionsItem(R.id.action_log)
-	void onLogClick() {
-		mLogFragment = new LogFragment_();
-		switchFragment(mLogFragment, true);
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@OptionsItem(R.id.action_about)
-	void onAboutClick() {
-		mAboutFragment = new AboutFragment_();
-		switchFragment(mAboutFragment, true);
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	protected void onDestroy() {
@@ -190,9 +150,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Subscribe
-	public void onSnackBarEvent(
-		SnackBarEvent ev
-	) {
+	public void onSnackBarEvent(SnackBarEvent ev) {
 		SnackBarUtil.make(this, ev.getMessage());
 	}
 
@@ -246,9 +204,23 @@ public class MainActivity extends AppCompatActivity {
             }
 		}
 	}
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
+        switch (item.getItemId()) {
+            case R.id.navigation_updates:
+                fm.beginTransaction().hide(active).show(updaterFragment).commit();
+                active = updaterFragment;
+                return true;
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            case R.id.navigation_installed:
+                fm.beginTransaction().hide(active).show(installedAppFragment).commit();
+                active = installedAppFragment;
+                return true;
 
+            case R.id.navigation_settings:
+                fm.beginTransaction().hide(active).show(mSettingsFragment).commit();
+                active = mSettingsFragment;
+                return true;
+        }
+        return false;
+    };
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
