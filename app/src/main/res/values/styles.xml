@@ -16,4 +16,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="ButtonBorder.Accent" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/bg_btn_outline</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+    </style>
 </resources>

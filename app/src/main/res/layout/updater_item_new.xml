@@ -27,37 +27,51 @@
                 android:textSize="16sp"
                 android:textColor="?android:textColorPrimary"
                 android:layout_toRightOf="@+id/installed_app_icon"
-                android:layout_marginRight="40dp"/>
+                android:layout_toLeftOf="@+id/installButton"
+                android:layout_marginRight="8dp"/>
             <TextView
                 android:id="@+id/installed_app_version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/installed_app_name"
                 android:layout_toRightOf="@+id/installed_app_icon"
+                android:layout_toLeftOf="@+id/installButton"
+                android:layout_marginRight="16dp"
                 android:text="App Version"
                 android:textSize="12sp"
                 android:textColor="?android:textColorSecondary"
-                android:layout_marginRight="40dp"/>
+                android:maxLines="1"
+                android:ellipsize="end" />
         <TextView
-            android:id="@+id/source"
+            android:id="@+id/newVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/installed_app_version"
             android:layout_toRightOf="@+id/installed_app_icon"
-            android:text="Source"
+            android:text="New Version"
             android:textSize="12sp"
             android:textColor="?android:textColorSecondary"
-            android:layout_marginRight="40dp"/>
+            android:layout_toLeftOf="@+id/installButton"
+            android:layout_marginRight="16dp"/>
         <ImageView
             android:id="@+id/actionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_expand_more_black_24dp"
-            android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:padding="8dp"
+            android:background="?android:selectableItemBackground"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/installButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:background="?android:selectableItemBackground"/>
+            style="@style/ButtonBorder.Accent"/>
+
     </RelativeLayout >
     <TextView
         android:paddingTop="8dp"

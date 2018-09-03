@@ -3,7 +3,6 @@ package com.apkupdater.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.apkupdater.R
@@ -30,8 +29,12 @@ open class UpdaterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 		mView?.installed_app_name?.text = u.name
 
 		//App Version
-		val v = if(u.newVersion == "?" && updates.updateList.size > 1) updates.updateList[1].newVersion else u.newVersion
-		mView?.installed_app_version?.text = String.format("%s (%s) -> %s (%s)", u.version, u.versionCode, v, u.newVersionCode)
+        mView?.installed_app_version?.text = u.version
+        mView?.newVersion?.text = u.newVersion
+        if (u.version.equals(u.newVersion)) {
+            mView?.installed_app_version?.append(" (" + u.versionCode +")")
+			mView?.newVersion?.append(" (" + u.newVersionCode +")")
+        }
 
 		//App Icon
 		mView?.installed_app_icon?.setImageDrawable(mView?.context?.packageManager?.getApplicationIcon(u.pname))
@@ -42,26 +45,22 @@ open class UpdaterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 		}
 
 		//Install
-		mView?.setOnClickListener {
+		mView?.installButton?.visibility = View.VISIBLE
+		mView?.installButton?.text = getActionString(u)
+		mView?.installButton?.setOnClickListener {
 			if (getActionString(u) == mContext?.getString(R.string.action_play)) launchInstall(u) else launchBrowser(u)
 		}
 
-		//Source
-		mView?.source?.text = getActionString(u)
-
         //Changelog
-		if (u.changeLog.isEmpty()){
-			mView?.actionButton?.visibility = View.GONE
-		} else {
-            mView?.actionButton?.visibility = View.VISIBLE
-        }
 		mView?.changelog?.text = Html.fromHtml(u.changeLog)
-        mView?.actionButton?.setOnClickListener {
-            if (mView?.changelog?.visibility == View.VISIBLE) {
-                mView?.changelog?.visibility = View.GONE
-            } else {
-                mView?.changelog?.visibility = View.VISIBLE
-            }
+        mView?.setOnClickListener {
+			if (!u.changeLog.isEmpty()){
+				if (mView?.changelog?.visibility == View.VISIBLE) {
+					mView?.changelog?.visibility = View.GONE
+				} else {
+					mView?.changelog?.visibility = View.VISIBLE
+				}
+			}
         }
 		setTopMargin(0)
 	}

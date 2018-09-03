@@ -63,7 +63,7 @@ public class InstalledAppAdapter extends RecyclerView.Adapter<InstalledAppAdapte
             mVersion = mView.findViewById(R.id.installed_app_version);
             mIcon = mView.findViewById(R.id.installed_app_icon);
             mActionOneButton = mView.findViewById(R.id.actionButton);
-            source = mView.findViewById(R.id.source);
+            source = mView.findViewById(R.id.newVersion);
 
             mName.setText(app.getName());
             mVersion.setText(app.getVersion());
