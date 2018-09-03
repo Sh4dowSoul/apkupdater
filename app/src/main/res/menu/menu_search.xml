@@ -5,4 +5,33 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"
         android:iconifiedByDefault="true"/>
+    <item
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        android:title="Nachtmodus"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="all"  android:id="@+id/filterOptions">
+                <item
+                    android:id="@+id/testVersions"
+                    android:checkable="true"
+                    android:title="@string/showTestVersions" />
+                <item
+                    android:id="@+id/systemApps"
+                    android:checkable="true"
+                    android:title="@string/showSystemApps" />
+                <item
+                    android:id="@+id/deactivated"
+                    android:checkable="true"
+                    android:title="@string/showDeactivated" />
+                <item
+                    android:id="@+id/incompatibleArchitecture"
+                    android:checkable="true"
+                    android:title="@string/showincompatibleArchitecture" />
+                <item
+                    android:id="@+id/incompatibleApi"
+                    android:checkable="true"
+                    android:title="@string/showincompatibleApi" />
+            </group>
+        </menu>
+    </item>
 </menu>

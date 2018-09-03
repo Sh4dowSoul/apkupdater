@@ -2,11 +2,13 @@ package com.apkupdater.fragment;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,19 +34,16 @@ import com.apkupdater.event.UpdateStopEvent;
 import com.apkupdater.event.UpdaterTitleChange;
 import com.apkupdater.model.AppState;
 import com.apkupdater.model.Update;
-import com.apkupdater.service.UpdaterService_;
 import com.apkupdater.updater.UpdaterOptions;
 import com.apkupdater.util.AnimationUtil;
 import com.apkupdater.util.ColorUtil;
 import com.apkupdater.util.InstalledAppUtil;
 import com.apkupdater.util.MyBus;
-import com.apkupdater.util.ServiceUtil;
 import com.apkupdater.util.SnackBarUtil;
 import com.squareup.otto.Subscribe;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -55,7 +54,6 @@ import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static java.security.AccessController.getContext;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -344,11 +342,62 @@ public class UpdaterFragment
 			}
 		});
 
+		//Load Filters
+		UpdaterOptions options = new UpdaterOptions(getContext());
+		menu.findItem(R.id.testVersions).setChecked(!options.skipExperimental());
+        menu.findItem(R.id.systemApps).setChecked(!options.getExcludeSystemApps());
+		menu.findItem(R.id.deactivated).setChecked(!options.getExcludeDisabledApps());
+		menu.findItem(R.id.incompatibleArchitecture).setChecked(!options.skipArchitecture());
+		menu.findItem(R.id.incompatibleApi).setChecked(!options.skipMinapi());
+
 		super.onCreateOptionsMenu(menu,inflater);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//Only for Filter Group
+		if (item.getGroupId() == R.id.filterOptions) {
+			//Don´t close Overflow Menu
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+			item.setActionView(new View(getContext()));
+			item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+				@Override
+				public boolean onMenuItemActionExpand(MenuItem item) {
+					return false;
+				}
+
+				@Override
+				public boolean onMenuItemActionCollapse(MenuItem item) {
+					return false;
+				}
+			});
+
+			SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(getContext());
+			switch (id){
+				case R.id.testVersions:
+					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_experimental_key), item.isChecked()).apply();
+					break;
+				case  R.id.systemApps:
+					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_exclude_system_apps_key), item.isChecked()).apply();
+					break;
+				case  R.id.deactivated:
+					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_exclude_disabled_apps_key), item.isChecked()).apply();
+					break;
+				case  R.id.incompatibleArchitecture:
+					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_architecture_key), item.isChecked()).apply();
+					break;
+				case  R.id.incompatibleApi:
+					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_minapi_key), item.isChecked()).apply();
+					break;
+			}
+			item.setChecked(!item.isChecked());
+
+			return false;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

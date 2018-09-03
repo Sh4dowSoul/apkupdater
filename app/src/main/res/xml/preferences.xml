@@ -74,42 +74,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/preferences_filter_category"
-        android:key="pref_key_general_settings"
-    >
-        <CheckBoxPreference
-            android:key="@string/preferences_general_skip_experimental_key"
-            android:summary="@string/preferences_general_skip_experimental_summary"
-            android:title="@string/preferences_general_skip_experimental_title"
-            android:defaultValue="true"
-        />
-        <CheckBoxPreference
-            android:key="@string/preferences_general_exclude_system_apps_key"
-            android:summary="@string/preferences_general_exclude_system_apps_summary"
-            android:title="@string/preferences_general_exclude_system_apps_title"
-            android:defaultValue="true"
-        />
-        <CheckBoxPreference
-            android:key="@string/preferences_general_exclude_disabled_apps_key"
-            android:summary="@string/preferences_general_exclude_disabled_apps_summary"
-            android:title="@string/preferences_general_exclude_disabled_apps_title"
-            android:defaultValue="true"
-        />
-        <CheckBoxPreference
-            android:key="@string/preferences_general_skip_architecture_key"
-            android:summary="@string/preferences_general_skip_architecture_summary"
-            android:title="@string/preferences_general_skip_architecture_title"
-            android:defaultValue="true"
-        />
-        <CheckBoxPreference
-            android:key="@string/preferences_general_skip_minapi_key"
-            android:summary="@string/preferences_general_skip_minapi_summary"
-            android:title="@string/preferences_general_skip_minapi_title"
-            android:defaultValue="true"
-        />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/preferences_sources_category"
         android:key="pref_key_sources_settings"
     >
