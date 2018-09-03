@@ -5,6 +5,7 @@ package com.apkupdater.fragment;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -110,6 +111,10 @@ public class AboutFragment
 
 			}
 		}
+		getActivity().setTitle(R.string.tab_about);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(5);
+		setHasOptionsMenu(false);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

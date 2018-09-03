@@ -1,12 +1,13 @@
 package com.apkupdater.fragment;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.apkupdater.R;
 import com.apkupdater.adapter.MainActivityPageAdapter;
@@ -24,13 +25,9 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @EFragment(R.layout.fragment_main)
-public class MainFragment
-	extends Fragment
-{
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public class MainFragment extends Fragment {
 
 	@ViewById(R.id.container)
     CustomViewPager mViewPager;
@@ -46,18 +43,13 @@ public class MainFragment
 
 	Bundle mSavedInstance;
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@Override
-	public void onCreate(
-		@Nullable Bundle savedInstanceState
-	) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		mSavedInstance = savedInstanceState;
 		super.onCreate(savedInstanceState);
 		mBus.register(this);
+		setHasOptionsMenu(true);
 	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public void onDestroy() {
@@ -65,11 +57,8 @@ public class MainFragment
 		super.onDestroy();
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@AfterViews
-	void init(
-	) {
+	void init() {
 		mViewPager.setAdapter(new MainActivityPageAdapter(getContext(), getChildFragmentManager()));
 		mViewPager.setOffscreenPageLimit(2);
 		mTabLayout.setupWithViewPager(mViewPager);
@@ -80,49 +69,24 @@ public class MainFragment
 			@Override public void onTabUnselected(TabLayout.Tab tab) {}
 			@Override public void onTabReselected(TabLayout.Tab tab) {}
 		});
-		selectTab(mAppState.getSelectedTab());
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@Override
-	public void onSaveInstanceState(
-		Bundle outState
-	) {
+	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@Override
-	public void onResume(
-	) {
+	public void onResume() {
 		super.onResume();
-
-		// Select tab
+		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(0);
+        getActivity().setTitle(R.string.app_name);
 		selectTab(mAppState.getSelectedTab());
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@Subscribe
-	public void onInstalledAppTitleChange(
-		InstalledAppTitleChange t
-	) {
-		if (mTabLayout != null) {
-			TabLayout.Tab selectedTab = mTabLayout.getTabAt(0);
-			if (selectedTab != null) {
-				selectedTab.setText(t.getTitle());
-			}
-		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@Subscribe
-	public void onUpdaterTitleChange(
-		UpdaterTitleChange t
-	) {
+	public void onInstalledAppTitleChange(InstalledAppTitleChange t) {
 		if (mTabLayout != null) {
 			TabLayout.Tab selectedTab = mTabLayout.getTabAt(1);
 			if (selectedTab != null) {
@@ -131,26 +95,18 @@ public class MainFragment
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@Subscribe
-	public void onSearchTitleChange(
-		SearchTitleChange t
-	) {
+	public void onUpdaterTitleChange(UpdaterTitleChange t) {
 		if (mTabLayout != null) {
-			TabLayout.Tab selectedTab = mTabLayout.getTabAt(2);
+			TabLayout.Tab selectedTab = mTabLayout.getTabAt(0);
 			if (selectedTab != null) {
 				selectedTab.setText(t.getTitle());
 			}
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@UiThread
-	public void selectTab(
-		int tab
-	) {
+	public void selectTab(int tab) {
 		if (mTabLayout != null) {
 			TabLayout.Tab selectedTab = mTabLayout.getTabAt(tab);
 			if (selectedTab != null) {
@@ -159,8 +115,9 @@ public class MainFragment
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_main, menu);
+		super.onCreateOptionsMenu(menu,inflater);
+	}
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

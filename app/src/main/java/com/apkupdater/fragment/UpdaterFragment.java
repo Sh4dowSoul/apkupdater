@@ -316,7 +316,7 @@ public class UpdaterFragment
 		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				((MainActivity)getActivity()).onUpdateClick();
+				((MainActivity)getActivity()).searchForUpdates();
 				mSwipeRefreshLayout.setRefreshing(false);
 			}
 		});

@@ -41,9 +41,9 @@ public class MainActivityPageAdapter
 		int position
 	) {
 		if (position == 0) {
-			return mInstalledAppFragment;
-		} else if (position == 1){
 			return mUpdaterFragment;
+		} else if (position == 1){
+			return mInstalledAppFragment;
 		} else {
 			throw new InvalidParameterException("Invalid position.");
 		}
@@ -64,9 +64,9 @@ public class MainActivityPageAdapter
 		int position
 	) {
 		if (position == 0) {
-			return mContext.getString(R.string.tab_installed);
-		} else if (position == 1){
 			return mContext.getString(R.string.tab_updates);
+		} else if (position == 1){
+			return mContext.getString(R.string.tab_installed);
 		}  else {
 			return "Error";
 		}

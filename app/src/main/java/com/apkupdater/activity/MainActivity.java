@@ -5,17 +5,14 @@ package com.apkupdater.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.apkupdater.R;
 import com.apkupdater.event.InstallAppEvent;
@@ -23,7 +20,6 @@ import com.apkupdater.event.PackageInstallerEvent;
 import com.apkupdater.event.SnackBarEvent;
 import com.apkupdater.fragment.AboutFragment_;
 import com.apkupdater.fragment.LogFragment_;
-import com.apkupdater.fragment.MainFragment;
 import com.apkupdater.fragment.MainFragment_;
 import com.apkupdater.fragment.SettingsFragment_;
 import com.apkupdater.model.AppState;
@@ -32,7 +28,6 @@ import com.apkupdater.model.LogMessage;
 import com.apkupdater.receiver.BootReceiver_;
 import com.apkupdater.service.UpdaterService_;
 import com.apkupdater.updater.UpdaterOptions;
-import com.apkupdater.util.AnimationUtil;
 import com.apkupdater.util.InjektUtil;
 import com.apkupdater.util.InstalledAppUtil;
 import com.apkupdater.util.LogUtil;
@@ -50,13 +45,8 @@ import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_AUTO;
 import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_NO;
 import static android.support.v7.app.AppCompatDelegate.MODE_NIGHT_YES;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 @EActivity
-public class MainActivity
-	extends AppCompatActivity
-{
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public class MainActivity extends AppCompatActivity {
 
 	@ViewById(R.id.toolbar)
 	Toolbar mToolbar;
@@ -79,8 +69,6 @@ public class MainActivity
 	MainFragment_ mMainFragment;
 
 	private int mRequestCode = 1000;
-    private int [] mSlideOut = { R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left };
-    private int [] mSlideIn = { R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right };
 
     //App Theme Constants
     public static final String APP_THEME = "app_theme";
@@ -121,192 +109,56 @@ public class MainActivity
 		// Simulate a boot com.apkupdater.receiver to set alarm
 		new BootReceiver_().onReceive(getBaseContext(), null);
 
-		// Create fragments
-		mMainFragment = new MainFragment_();
-		mSettingsFragment = new SettingsFragment_();
-		mLogFragment = new LogFragment_();
-		mAboutFragment = new AboutFragment_();
-
 		// Add the main fragment
-		if (!(getSupportFragmentManager().findFragmentById(R.id.container) instanceof MainFragment)) {
-			getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, mMainFragment)
-				.add(R.id.container, mSettingsFragment)
-				.add(R.id.container, mLogFragment)
-				.add(R.id.container, mAboutFragment)
-				.show(mMainFragment)
-				.hide(mSettingsFragment)
-				.hide(mLogFragment)
-				.hide(mAboutFragment)
-			.commit();
-		}
-
-		// Switch to the correct fragment
-		if (mAppState.getSettingsActive()) {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					switchSettings(true);
-				}
-			}, 1);
-		} else if (mAppState.getLogActive()) {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					switchLog(true);
-				}
-			}, 1);
-		} else if (mAppState.getAboutActive()) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    switchAbout(true);
-                }
-            }, 1);
-        }
+		mMainFragment = new MainFragment_();
+		switchFragment(mMainFragment, false);
 
 		if (new UpdaterOptions(this).updateOnStartup()){
-			onUpdateClick();
+			searchForUpdates();
 		}
 
+		mToolbar.setNavigationOnClickListener(v -> {
+			this.onBackPressed();
+		});
 	}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void searchForUpdates(){
+		if (!ServiceUtil.isServiceRunning(getBaseContext(), UpdaterService_.class)) {
+			UpdaterService_.intent(getApplication()).start();
+		}
+	}
 
-    private void doTransition(
-        int [] anim,
-        Fragment show,
-        Fragment [] hide
-    ) {
-        boolean disableAnimations = new UpdaterOptions(this).disableAnimations();
-	    FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-
-	    if (!disableAnimations) {
-            t = t.setCustomAnimations(anim[0], anim[1], anim[2], anim[3]);
-        }
-
-        t = t.show(show);
-
-	    for (Fragment f : hide) {
-	        t = t.hide(f);
-        }
-
-        t.commit();
-    }
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private void switchSettings(
-		boolean b
-	) {
-		if (b) {
-		    doTransition(mSlideOut, mSettingsFragment, new Fragment[] {mMainFragment, mLogFragment, mAboutFragment});
-			changeToolbar(getString(R.string.action_settings), true);
+	public void switchFragment(Fragment fragment, boolean replace) {
+		FragmentManager manager = getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		if (replace) {
+			transaction.replace(R.id.container, fragment);
+			transaction.addToBackStack(null);
 		} else {
-            doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			changeToolbar(getString(R.string.app_name), false);
+			transaction.add(R.id.container, fragment);
 		}
-
-		mAppState.setSettingsActive(b);
+		transaction.commit();
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private void switchLog(
-		boolean b
-	) {
-		if (b) {
-            doTransition(mSlideOut, mLogFragment, new Fragment[] {mMainFragment, mSettingsFragment, mAboutFragment});
-			changeToolbar(getString(R.string.action_log), true);
-		} else {
-            doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			changeToolbar(getString(R.string.app_name), false);
-		}
-
-		mAppState.setLogActive(b);
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private void switchAbout(
-		boolean b
-	) {
-		if (b) {
-            doTransition(mSlideOut, mAboutFragment, new Fragment[] {mMainFragment, mSettingsFragment, mLogFragment});
-			changeToolbar(getString(R.string.tab_about), true);
-		} else {
-            doTransition(mSlideIn, mMainFragment, new Fragment[] {mSettingsFragment, mLogFragment, mAboutFragment});
-			changeToolbar(getString(R.string.app_name), false);
-		}
-
-		mAppState.setAboutActive(b);
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private void changeToolbar(
-		String title,
-		boolean arrow
-	) {
-		try {
-		ActionBar bar = getSupportActionBar();
-			if (bar != null) {
-				AnimationUtil.startToolbarAnimation(this, mToolbar);
-
-				// This is to try to avoid the text to be cut during animation. TODO: Find a better way.
-				TextView t = (TextView) mToolbar.getChildAt(0);
-				t.getLayoutParams().width = 2000;
-
-				bar.setTitle(title);
-				bar.setDisplayHomeAsUpEnabled(arrow);
-			}
-		} catch (Exception e) {}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@OptionsItem(R.id.action_settings)
-	void onSettingsClick(
-	) {
-		switchSettings(!mAppState.getSettingsActive());
+	void onSettingsClick() {
+		mSettingsFragment = new SettingsFragment_();
+		switchFragment(mSettingsFragment, true);
 	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@OptionsItem(android.R.id.home)
-	void onHomeClick(
-	) {
-		if (mAppState.getSettingsActive()) {
-			switchSettings(!mAppState.getSettingsActive());
-		} else if (mAppState.getLogActive()) {
-			switchLog(!mAppState.getLogActive());
-		} else if (mAppState.getAboutActive()) {
-			switchAbout(!mAppState.getAboutActive());
-		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@OptionsItem(R.id.action_log)
-	void onLogClick(
-	) {
-		switchLog(!mAppState.getLogActive());
+	void onLogClick() {
+		mLogFragment = new LogFragment_();
+		switchFragment(mLogFragment, true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@OptionsItem(R.id.action_about)
-	void onAboutClick(
-	) {
-		switchAbout(!mAppState.getAboutActive());
+	void onAboutClick() {
+		mAboutFragment = new AboutFragment_();
+		switchFragment(mAboutFragment, true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -336,48 +188,6 @@ public class MainActivity
                 break;
         }
 	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-/*
-		// We are checking if the theme changed
-		if (mAppState.getCurrentTheme() != ThemeUtil.getActivityThemeFromOptions(getBaseContext())) {
-			finish();
-			MainActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_CLEAR_TOP).start();
-		} */
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@Override
-	public void onBackPressed() {
-		// Handle back press depending on app state
-		if (mAppState.getLogActive()) {
-			switchLog(false);
-		} else if (mAppState.getSettingsActive()){
-			switchSettings(false);
-		} else if (mAppState.getAboutActive()){
-			switchAbout(false);
-		} else {
-			super.onBackPressed();
-		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //@Click(R.id.update_button)
-    public void onUpdateClick(
-    ) {
-        if (!ServiceUtil.isServiceRunning(getBaseContext(), UpdaterService_.class)) {
-            UpdaterService_.intent(getApplication()).start();
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Subscribe
 	public void onSnackBarEvent(

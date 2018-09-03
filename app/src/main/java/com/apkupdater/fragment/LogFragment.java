@@ -3,6 +3,7 @@ package com.apkupdater.fragment;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.apkupdater.R;
@@ -41,6 +42,10 @@ public class LogFragment
 	) {
 		mListView.setAdapter(mAdapter);
 		mBus.register(this);
+		getActivity().setTitle(R.string.action_log);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(5);
+		setHasOptionsMenu(false);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

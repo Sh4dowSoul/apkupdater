@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.apkupdater.R;
+import com.apkupdater.adapter.UpdaterAdapter;
 import com.apkupdater.dialog.OwnPlayAccountDialog;
 import com.apkupdater.event.UpdateInstalledAppsEvent;
 import com.apkupdater.model.Constants;
@@ -38,12 +40,13 @@ public class SettingsFragment
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void onCreatePreferences(
-		Bundle savedInstanceState,
-		String rootKey
-	) {
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(mChanges);
 		addPreferencesFromResource(R.xml.preferences);
+		getActivity().setTitle(R.string.action_settings);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(5);
+		setHasOptionsMenu(false);
 	}
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
