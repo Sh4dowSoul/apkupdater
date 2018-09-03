@@ -26,7 +26,8 @@
                 android:text="App Name"
                 android:textSize="16sp"
                 android:textColor="?android:textColorPrimary"
-                android:layout_toRightOf="@+id/installed_app_icon"/>
+                android:layout_toRightOf="@+id/installed_app_icon"
+                android:layout_marginRight="40dp"/>
             <TextView
                 android:id="@+id/installed_app_version"
                 android:layout_width="match_parent"
