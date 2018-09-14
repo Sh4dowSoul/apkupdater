@@ -43,6 +43,7 @@ public class SettingsFragment
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(mChanges);
 		addPreferencesFromResource(R.xml.preferences);
+		getActivity().setTitle(R.string.action_settings);
 	}
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

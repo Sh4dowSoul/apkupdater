@@ -109,6 +109,7 @@ public class UpdaterFragment
 		super.onCreate(savedInstanceState);
 		mAdapter = new UpdaterAdapter(getContext());
 		setHasOptionsMenu(true);
+		getActivity().setTitle(R.string.tab_updates);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -342,31 +343,6 @@ public class UpdaterFragment
 			}
 		});
 		super.onCreateOptionsMenu(menu,inflater);
-	}
-
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		Fragment newFragment = null;
-		switch (id){
-			case R.id.filter:
-				changeFragment(new FilterFragment_());
-				break;
-			case R.id.settings:
-				changeFragment(new SettingsFragment_());
-				break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	private void changeFragment(Fragment newFragment){
-		FragmentManager fm = getActivity().getSupportFragmentManager();
-		FragmentTransaction transaction = fm.beginTransaction();
-		transaction.replace(R.id.main_container, newFragment);
-		transaction.addToBackStack(null);
-		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		transaction.commit();
 	}
 }
 

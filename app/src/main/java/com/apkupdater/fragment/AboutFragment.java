@@ -112,9 +112,6 @@ public class AboutFragment
 			}
 		}
 		getActivity().setTitle(R.string.tab_about);
-		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(5);
-		setHasOptionsMenu(false);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -5,16 +5,26 @@ package com.apkupdater.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.apkupdater.R;
 import com.apkupdater.event.InstallAppEvent;
 import com.apkupdater.event.PackageInstallerEvent;
 import com.apkupdater.event.SnackBarEvent;
+import com.apkupdater.fragment.AboutFragment;
+import com.apkupdater.fragment.AboutFragment_;
+import com.apkupdater.fragment.FilterFragment_;
+import com.apkupdater.fragment.SettingsFragment_;
 import com.apkupdater.fragment.UpdaterFragment_;
 import com.apkupdater.model.AppState;
 import com.apkupdater.model.DownloadInfo;
@@ -44,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
 	@ViewById(R.id.toolbar)
 	Toolbar mToolbar;
 
+	@ViewById(R.id.appBarLayout)
+	AppBarLayout appBar;
+
 	@Bean
 	MyBus mBus;
 
@@ -65,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String DARK_THEME = "Dark";
     private String CURRENT_THEME;
 
+	BottomSheetBehavior bottomSheetBehavior;
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
@@ -81,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_main);
 		setSupportActionBar(mToolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
 		mBus.register(this);
 
@@ -101,6 +118,32 @@ public class MainActivity extends AppCompatActivity {
 			searchForUpdates();
 		}
 		fm.beginTransaction().add(R.id.main_container, updaterFragment, "1").commit();
+
+		appBar = findViewById(R.id.appBarLayout);
+		bottomSheetBehavior = BottomSheetBehavior.from(appBar);
+
+		NavigationView navigationView = findViewById(R.id.nav_view);
+		navigationView.setCheckedItem(R.id.navigation_updates);
+		navigationView.setNavigationItemSelectedListener(menuItem -> {
+			menuItem.setChecked(true);
+			bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+			switch (menuItem.getItemId()){
+				case R.id.navigation_updates:
+					changeFragment(new UpdaterFragment_());
+					break;
+				case R.id.navigation_filter:
+					changeFragment(new FilterFragment_());
+					break;
+				case R.id.navigation_settings:
+					changeFragment(new SettingsFragment_());
+					break;
+				case R.id.navigation_about:
+					changeFragment(new AboutFragment_());
+					break;
+			}
+			return true;
+		});
 	}
 
 	public void searchForUpdates(){
@@ -189,5 +232,30 @@ public class MainActivity extends AppCompatActivity {
                 mAppState.getDownloadIds().remove(requestCode);
             }
 		}
+	}
+
+	private void changeFragment(Fragment newFragment){
+		FragmentManager fm = getSupportFragmentManager();
+		FragmentTransaction transaction = fm.beginTransaction();
+		transaction.replace(R.id.main_container, newFragment);
+		transaction.addToBackStack(null);
+		//transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		transaction.commit();
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
+					bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+				} else {
+					bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+				}
+
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

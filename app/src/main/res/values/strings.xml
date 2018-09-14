@@ -100,4 +100,5 @@
     <string name="showDeactivated">Disabled Apps</string>
     <string name="showincompatibleArchitecture">Incompatible Architectures</string>
     <string name="showincompatibleApi">Incompatible APIs</string>
+    <string name="tab_filter">Filter</string>
 </resources>

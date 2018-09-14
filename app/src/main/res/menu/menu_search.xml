@@ -5,12 +5,4 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"
         android:iconifiedByDefault="true"/>
-    <item android:id="@+id/filter"
-        android:title="Filter"
-        android:icon="@drawable/ic_filter_list_black_24dp"
-        app:showAsAction="always"/>
-    <item android:id="@+id/settings"
-        android:title="@string/action_settings"
-        android:icon="@drawable/ic_settings"
-        app:showAsAction="always"/>
 </menu>

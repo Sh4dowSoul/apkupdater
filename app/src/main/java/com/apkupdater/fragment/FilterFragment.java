@@ -41,6 +41,7 @@ public class FilterFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.filter_preferences, rootKey);
+        getActivity().setTitle(getString(R.string.tab_filter));
 
         recyclerviewPreference = (RecyclerviewPreference) findPreference("customList");
 

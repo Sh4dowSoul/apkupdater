@@ -1,20 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.apkupdater.activity.MainActivity"
->
-    <item
-        android:id="@+id/navigation_updates"
-        android:title="@string/tab_updates"
-        android:icon="@drawable/ic_new_releases_black_24dp" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.apkupdater.activity.MainActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_updates"
+            android:title="@string/tab_updates"
+            android:icon="@drawable/ic_new_releases_black_24dp" />
 
-    <item
-        android:id="@+id/navigation_installed"
-        android:title="@string/tab_installed"
-        android:icon="@drawable/ic_offline_pin_black_24dp" />
+        <item
+            android:id="@+id/navigation_filter"
+            android:title="@string/tab_filter"
+            android:icon="@drawable/ic_filter_list_black_24dp" />
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:title="@string/action_settings"
-        android:icon="@drawable/ic_settings" />
+        <item
+            android:id="@+id/navigation_settings"
+            android:title="@string/action_settings"
+            android:icon="@drawable/ic_settings" />
+        <item
+            android:id="@+id/navigation_about"
+            android:title="@string/tab_about"
+            android:icon="@drawable/ic_info" />
+    </group>
 </menu>
