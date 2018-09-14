@@ -2,13 +2,13 @@ package com.apkupdater.fragment;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -341,62 +341,32 @@ public class UpdaterFragment
 				return true;
 			}
 		});
-
-		//Load Filters
-		UpdaterOptions options = new UpdaterOptions(getContext());
-		menu.findItem(R.id.testVersions).setChecked(!options.skipExperimental());
-        menu.findItem(R.id.systemApps).setChecked(!options.getExcludeSystemApps());
-		menu.findItem(R.id.deactivated).setChecked(!options.getExcludeDisabledApps());
-		menu.findItem(R.id.incompatibleArchitecture).setChecked(!options.skipArchitecture());
-		menu.findItem(R.id.incompatibleApi).setChecked(!options.skipMinapi());
-
 		super.onCreateOptionsMenu(menu,inflater);
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-
-		//Only for Filter Group
-		if (item.getGroupId() == R.id.filterOptions) {
-			//Don´t close Overflow Menu
-			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-			item.setActionView(new View(getContext()));
-			item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-				@Override
-				public boolean onMenuItemActionExpand(MenuItem item) {
-					return false;
-				}
-
-				@Override
-				public boolean onMenuItemActionCollapse(MenuItem item) {
-					return false;
-				}
-			});
-
-			SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(getContext());
-			switch (id){
-				case R.id.testVersions:
-					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_experimental_key), item.isChecked()).apply();
-					break;
-				case  R.id.systemApps:
-					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_exclude_system_apps_key), item.isChecked()).apply();
-					break;
-				case  R.id.deactivated:
-					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_exclude_disabled_apps_key), item.isChecked()).apply();
-					break;
-				case  R.id.incompatibleArchitecture:
-					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_architecture_key), item.isChecked()).apply();
-					break;
-				case  R.id.incompatibleApi:
-					prefs.edit().putBoolean(getResources().getString(R.string.preferences_general_skip_minapi_key), item.isChecked()).apply();
-					break;
-			}
-			item.setChecked(!item.isChecked());
-
-			return false;
+		Fragment newFragment = null;
+		switch (id){
+			case R.id.filter:
+				changeFragment(new FilterFragment_());
+				break;
+			case R.id.settings:
+				changeFragment(new SettingsFragment_());
+				break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void changeFragment(Fragment newFragment){
+		FragmentManager fm = getActivity().getSupportFragmentManager();
+		FragmentTransaction transaction = fm.beginTransaction();
+		transaction.replace(R.id.main_container, newFragment);
+		transaction.addToBackStack(null);
+		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		transaction.commit();
 	}
 }
 

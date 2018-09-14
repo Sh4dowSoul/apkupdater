@@ -117,15 +117,10 @@ public class InstalledAppAdapter extends RecyclerView.Adapter<InstalledAppAdapte
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public InstalledAppAdapter(
-		Context context,
-		RecyclerView view,
-		List<InstalledApp> apps
-	) {
+	public InstalledAppAdapter(Context context, RecyclerView view, List<InstalledApp> apps) {
 		mContext = context;
 		mAdapter = this;
 		mView = view;
-		AnimationUtil.startSlideAnimation(mContext, mView);
 		mApps = InstalledAppUtil.sort(mContext, apps);
 	}
 

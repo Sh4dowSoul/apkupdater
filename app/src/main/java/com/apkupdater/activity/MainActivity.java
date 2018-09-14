@@ -5,8 +5,6 @@ package com.apkupdater.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
@@ -17,8 +15,6 @@ import com.apkupdater.R;
 import com.apkupdater.event.InstallAppEvent;
 import com.apkupdater.event.PackageInstallerEvent;
 import com.apkupdater.event.SnackBarEvent;
-import com.apkupdater.fragment.InstalledAppFragment_;
-import com.apkupdater.fragment.SettingsFragment_;
 import com.apkupdater.fragment.UpdaterFragment_;
 import com.apkupdater.model.AppState;
 import com.apkupdater.model.DownloadInfo;
@@ -58,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
     LogUtil mLog;
 
 	UpdaterFragment_ updaterFragment = new UpdaterFragment_();
-	InstalledAppFragment_ installedAppFragment = new InstalledAppFragment_();
-	SettingsFragment_ mSettingsFragment = new SettingsFragment_();
-	Fragment active = updaterFragment;
 	final FragmentManager fm = getSupportFragmentManager();
 
 	private int mRequestCode = 1000;
@@ -107,13 +100,6 @@ public class MainActivity extends AppCompatActivity {
 		if (new UpdaterOptions(this).updateOnStartup()){
 			searchForUpdates();
 		}
-
-		//Bottom Bar
-		BottomNavigationView navigation = findViewById(R.id.navigation);
-		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-		fm.beginTransaction().add(R.id.main_container, mSettingsFragment, "3").hide(mSettingsFragment).commit();
-		fm.beginTransaction().add(R.id.main_container, installedAppFragment, "2").hide(installedAppFragment).commit();
 		fm.beginTransaction().add(R.id.main_container, updaterFragment, "1").commit();
 	}
 
@@ -204,23 +190,4 @@ public class MainActivity extends AppCompatActivity {
             }
 		}
 	}
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
-        switch (item.getItemId()) {
-            case R.id.navigation_updates:
-                fm.beginTransaction().hide(active).show(updaterFragment).commit();
-                active = updaterFragment;
-                return true;
-
-            case R.id.navigation_installed:
-                fm.beginTransaction().hide(active).show(installedAppFragment).commit();
-                active = installedAppFragment;
-                return true;
-
-            case R.id.navigation_settings:
-                fm.beginTransaction().hide(active).show(mSettingsFragment).commit();
-                active = mSettingsFragment;
-                return true;
-        }
-        return false;
-    };
 }

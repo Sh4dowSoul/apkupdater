@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Updates">
+
+        <SwitchPreference
+            android:id="@+id/experimental"
+            android:defaultValue="false"
+            android:key="@string/preferences_general_skip_experimental_key"
+            android:title="@string/showTestVersions" />
+        <SwitchPreference
+            android:id="@+id/incompatiblearch"
+            android:defaultValue="false"
+            android:key="@string/preferences_general_skip_experimental_key"
+            android:title="@string/showincompatibleArchitecture" />
+        <SwitchPreference
+            android:id="@+id/incompatibleapi"
+            android:defaultValue="false"
+            android:key="@string/preferences_general_skip_minapi_key"
+            android:title="@string/showincompatibleApi" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Apps">
+
+        <SwitchPreference
+            android:id="@+id/systemapps"
+            android:defaultValue="false"
+            android:key="@string/preferences_general_exclude_system_apps_key"
+            android:title="@string/showSystemApps" />
+        <SwitchPreference
+            android:id="@+id/disabled"
+            android:defaultValue="false"
+            android:key="@string/preferences_general_exclude_disabled_apps_key"
+            android:title="@string/showDeactivated" />
+        <SwitchPreference
+            android:id="@+id/useCustomFilter"
+            android:defaultValue="false"
+            android:key="customFilter"
+            android:title="Custom Filter" />
+        <com.apkupdater.view.RecyclerviewPreference
+            android:id="@+id/customList"
+            android:key="customList"
+            android:layout="@layout/fragment_installed_apps"/>
+    </PreferenceCategory>
+</PreferenceScreen>

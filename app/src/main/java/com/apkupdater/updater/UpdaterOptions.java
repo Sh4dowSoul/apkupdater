@@ -37,7 +37,7 @@ public class UpdaterOptions
 	public boolean skipExperimental(
 	) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		return sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_experimental_key), true);
+		return !sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_experimental_key), true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ public class UpdaterOptions
     public boolean skipArchitecture(
     ) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_architecture_key), true);
+        return !sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_architecture_key), true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ public class UpdaterOptions
     public boolean skipMinapi(
     ) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_minapi_key), true);
+        return !sharedPref.getBoolean(mContext.getString(R.string.preferences_general_skip_minapi_key), true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ public class UpdaterOptions
 	public boolean getExcludeSystemApps(
 	) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		return sharedPref.getBoolean(mContext.getString(R.string.preferences_general_exclude_system_apps_key), true);
+		return !sharedPref.getBoolean(mContext.getString(R.string.preferences_general_exclude_system_apps_key), true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,7 +231,7 @@ public class UpdaterOptions
 	public boolean getExcludeDisabledApps(
 	) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-		return sharedPref.getBoolean(mContext.getString(R.string.preferences_general_exclude_disabled_apps_key), true);
+		return !sharedPref.getBoolean(mContext.getString(R.string.preferences_general_exclude_disabled_apps_key), true);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
